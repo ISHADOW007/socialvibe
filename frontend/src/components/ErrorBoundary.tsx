@@ -91,7 +91,7 @@ export default class ErrorBoundary extends Component<Props, State> {
                 
                 <Button
                   onClick={this.handleReload}
-                  variant="outline"
+                  variant="secondary"
                   className="w-full"
                 >
                   Reload Page

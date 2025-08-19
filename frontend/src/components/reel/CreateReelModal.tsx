@@ -9,7 +9,6 @@ import {
   MapPinIcon,
   TagIcon,
   AtSymbolIcon,
-  CheckIcon,
   XMarkIcon,
   ExclamationTriangleIcon
 } from '@heroicons/react/24/outline'
@@ -531,7 +530,8 @@ export default function CreateReelModal({
       <ProfileCompletionModal
         isOpen={showProfileCompletion}
         onClose={() => setShowProfileCompletion(false)}
-        onComplete={handleProfileCompleted}
+        
+        onComplete={() => { handleProfileCompleted }}
       />
     </Modal>
   )

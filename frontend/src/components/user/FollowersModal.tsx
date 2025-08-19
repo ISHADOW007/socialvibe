@@ -34,7 +34,8 @@ export default function FollowersModal({ user, onClose, initialTab = 'followers'
         ? await userService.getUserFollowers(user._id, pageNum, 20)
         : await userService.getUserFollowing(user._id, pageNum, 20)
 
-      const newUsers = response.data || []
+      // Use response.data.items as the array of users
+      const newUsers = response.data?.items || []
       
       if (reset) {
         if (activeTab === 'followers') {
@@ -77,7 +78,7 @@ export default function FollowersModal({ user, onClose, initialTab = 'followers'
   const currentUsers = activeTab === 'followers' ? followers : following
 
   return (
-    <Modal onClose={onClose} title={`${user.profile.fullName || user.username}`}>
+    <Modal isOpen={true} onClose={onClose} title={`${user.profile.fullName || user.username}`}>
       <div className="w-full max-w-md">
         {/* Tabs */}
         <div className="flex border-b border-gray-200 dark:border-gray-700 mb-4">

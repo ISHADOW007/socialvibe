@@ -144,7 +144,7 @@ export default function Settings() {
                   
                   <div className="flex space-x-2">
                     <Button
-                      variant="outline"
+                      variant="secondary"
                       size="sm"
                       onClick={() => navigate(`/profile/${user.username}`)}
                     >
@@ -271,7 +271,7 @@ export default function Settings() {
               </div>
               <Button
                 onClick={toggleTheme}
-                variant="outline"
+                variant="secondary"
               >
                 {theme === 'dark' ? (
                   <>
@@ -378,7 +378,7 @@ export default function Settings() {
               <Button
                 onClick={handleLogout}
                 loading={isLoggingOut}
-                variant="outline"
+                variant="secondary"
                 className="border-red-500/30 text-red-400 hover:bg-red-500/10 hover:border-red-500"
               >
                 <ArrowRightOnRectangleIcon className="w-4 h-4 mr-2" />

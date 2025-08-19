@@ -3,9 +3,9 @@ import Modal from '../ui/Modal'
 import Button from '../ui/Button'
 import { 
   PhotoIcon,
-  VideoCameraIcon,
+  
   XMarkIcon,
-  EyeSlashIcon,
+  
   MapPinIcon,
   MusicalNoteIcon,
   FaceSmileIcon

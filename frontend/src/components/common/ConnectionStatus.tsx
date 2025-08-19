@@ -3,7 +3,7 @@ import socketService from '@/services/socketService'
 
 export default function ConnectionStatus() {
   const [isConnected, setIsConnected] = useState(false)
-  const [serverUnavailable, setServerUnavailable] = useState(false)
+  const [, setServerUnavailable] = useState(false)
   const [showRetryButton, setShowRetryButton] = useState(false)
 
   useEffect(() => {

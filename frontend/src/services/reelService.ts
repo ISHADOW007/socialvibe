@@ -1,4 +1,4 @@
-import api, { createFormData } from './api'
+import api from './api'
 import type { ApiResponse, PaginatedResponse } from '@/types/api'
 
 export interface ReelAuthor {
@@ -81,11 +81,21 @@ export const reelService = {
     const backendData = response.data.data!
     return {
       status: response.data.status,
+      pagination: {
+        ...backendData.pagination,
+        hasNextPage: backendData.pagination.hasNext // Map hasNext to hasNextPage
+      },
       data: {
         items: backendData.reels,
         pagination: {
           ...backendData.pagination,
-          hasNextPage: backendData.pagination.hasNext // Map hasNext to hasNextPage
+          hasNextPage: backendData.pagination.hasNext
+        },
+        reverse: function (): import("react").SetStateAction<import("./messageService").Message[]> {
+          throw new Error('Function not implemented.')
+        },
+        filter: function (_: (m: any) => boolean): unknown {
+          throw new Error('Function not implemented.')
         }
       }
     }
@@ -193,11 +203,21 @@ export const reelService = {
     const backendData = response.data.data!
     return {
       status: response.data.status,
+      pagination: {
+        ...backendData.pagination,
+        hasNextPage: backendData.pagination.hasNext
+      },
       data: {
         items: backendData.reels,
         pagination: {
           ...backendData.pagination,
           hasNextPage: backendData.pagination.hasNext
+        },
+        reverse: () => {
+          throw new Error('reverse() not implemented for reels')
+        },
+        filter: (_arg0: (m: any) => boolean) => {
+          throw new Error('filter() not implemented for reels')
         }
       }
     }
@@ -213,11 +233,21 @@ export const reelService = {
     return {
       status: response.data.status,
       hashtag: backendData.hashtag,
+      pagination: {
+        ...backendData.pagination,
+        hasNextPage: backendData.pagination.hasNext
+      },
       data: {
         items: backendData.reels,
         pagination: {
           ...backendData.pagination,
           hasNextPage: backendData.pagination.hasNext
+        },
+        reverse: function (): import("react").SetStateAction<import("./messageService").Message[]> {
+          throw new Error('Function not implemented.')
+        },
+        filter: function (_: (m: any) => boolean): unknown {
+          throw new Error('Function not implemented.')
         }
       }
     }
@@ -233,11 +263,21 @@ export const reelService = {
     return {
       status: response.data.status,
       musicName: backendData.musicName,
+      pagination: {
+        ...backendData.pagination,
+        hasNextPage: backendData.pagination.hasNext
+      },
       data: {
         items: backendData.reels,
         pagination: {
           ...backendData.pagination,
           hasNextPage: backendData.pagination.hasNext
+        },
+        reverse: function (): import("react").SetStateAction<import("./messageService").Message[]> {
+          throw new Error('Function not implemented.')
+        },
+        filter: function (_: (m: any) => boolean): unknown {
+          throw new Error('Function not implemented.')
         }
       }
     }

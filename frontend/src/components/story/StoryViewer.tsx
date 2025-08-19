@@ -8,7 +8,6 @@ import {
   SpeakerWaveIcon,
   SpeakerXMarkIcon,
   HeartIcon,
-  ChatBubbleLeftIcon,
   PaperAirplaneIcon
 } from '@heroicons/react/24/outline'
 import { clsx } from 'clsx'
@@ -110,14 +109,14 @@ export default function StoryViewer({
   className
 }: StoryViewerProps) {
   const videoRef = useRef<HTMLVideoElement>(null)
-  const progressRef = useRef<HTMLDivElement>(null)
+  // const progressRef = useRef<HTMLDivElement>(null)
   
   const [isPlaying, setIsPlaying] = useState(true)
   const [isMuted, setIsMuted] = useState(true)
   const [progress, setProgress] = useState(0)
   const [showReplyInput, setShowReplyInput] = useState(false)
   const [replyMessage, setReplyMessage] = useState('')
-  const [autoPlayTimer, setAutoPlayTimer] = useState<NodeJS.Timeout | null>(null)
+  const [, setAutoPlayTimer] = useState<NodeJS.Timeout | null>(null)
 
   const currentGroup = storyGroups[currentGroupIndex]
   const currentStory = currentGroup?.stories[currentStoryIndex]
@@ -447,7 +446,7 @@ export default function StoryViewer({
               <span className="text-white font-medium">{currentStory.stats.viewsCount} views</span>
             </div>
             <div className="flex -space-x-2 overflow-hidden">
-              {currentStory.viewers.slice(0, 5).map((viewer, index) => (
+              {currentStory.viewers.slice(0, 5).map((viewer,) => (
                 <div key={viewer.user._id} className="w-6 h-6 rounded-full overflow-hidden border-2 border-white">
                   {viewer.user.profile.avatar ? (
                     <img

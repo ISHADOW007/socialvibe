@@ -33,7 +33,7 @@ export default function FileUpload({
   maxFiles = 10,
   maxSize = 100 * 1024 * 1024, // 100MB
   onFilesChange,
-  onUploadProgress,
+  
   className,
   disabled = false,
   children

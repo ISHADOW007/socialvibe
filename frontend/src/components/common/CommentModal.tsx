@@ -1,8 +1,8 @@
 import { useState, useRef, useEffect } from 'react'
 import { 
-  XMarkIcon, 
+  // XMarkIcon, 
   HeartIcon,
-  EllipsisHorizontalIcon,
+  // EllipsisHorizontalIcon,
   PaperAirplaneIcon 
 } from '@heroicons/react/24/outline'
 import { HeartIcon as HeartSolidIcon } from '@heroicons/react/24/solid'
@@ -47,8 +47,8 @@ interface CommentModalProps {
 export default function CommentModal({
   isOpen,
   onClose,
-  contentId,
-  contentType,
+  // contentId,
+  // contentType,
   comments,
   onAddComment,
   onLikeComment,

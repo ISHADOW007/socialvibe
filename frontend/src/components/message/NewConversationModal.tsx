@@ -32,7 +32,7 @@ export default function NewConversationModal({ onClose, onConversationCreated }:
       setLoading(true)
       setError(null)
       const response = await userService.searchUsers(searchQuery.trim(), 1, 20)
-      setSearchResults(response.data || [])
+      setSearchResults((response.data?.items) || [])
     } catch (err: any) {
       setError(err.message || 'Failed to search users')
       setSearchResults([])
@@ -56,7 +56,7 @@ export default function NewConversationModal({ onClose, onConversationCreated }:
   }
 
   return (
-    <Modal onClose={onClose} title="New Conversation">
+    <Modal isOpen={true} onClose={onClose} title="New Conversation">
       <div className="space-y-4">
         {/* Search input */}
         <div className="relative">

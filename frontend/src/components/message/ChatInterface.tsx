@@ -72,7 +72,23 @@ export default function ChatInterface({ conversation, onClose }: ChatInterfacePr
       if (event.conversationId === conversation._id) {
         setMessages(prev => prev.map(msg => 
           msg._id === event.messageId 
-            ? { ...msg, reactions: [...msg.reactions, event.reaction] }
+            ? { 
+                ...msg, 
+                reactions: [
+                  ...msg.reactions, 
+                  {
+                    ...event.reaction,
+                    user: {
+                      _id: event.reaction.user.userId ,//|| event.reaction.user._id,
+                      username: event.reaction.user.username,
+                      profile: {
+                        avatar: event.reaction.user.avatar,
+                        // Add other profile fields if needed
+                      }
+                    }
+                  }
+                ] 
+              }
             : msg
         ))
       }
@@ -85,8 +101,8 @@ export default function ChatInterface({ conversation, onClose }: ChatInterfacePr
       messagesPollInterval = setInterval(async () => {
         if (!socketService.isSocketConnected() && !loading) {
           try {
-            const response = await messageService.getMessages(conversation._id, 1, 20)
-            const latestMessages = response.data || []
+            const response = await messageService.getConversationMessages(conversation._id, 1, 20)
+            const latestMessages = (response.data || []) as unknown as Message[]
             
             // Only update if we have new messages
             setMessages(prev => {
@@ -136,7 +152,10 @@ export default function ChatInterface({ conversation, onClose }: ChatInterfacePr
       if (page === 1) {
         setMessages(newMessages.reverse()) // Reverse to show oldest first
       } else {
-        setMessages(prev => [...newMessages.reverse(), ...prev])
+        setMessages(prev => [
+          ...(Array.isArray(newMessages) ? newMessages.slice().reverse() : []),
+          ...prev
+        ])
       }
 
       setHasMoreMessages(response.pagination?.hasNext || false)
@@ -210,7 +229,10 @@ export default function ChatInterface({ conversation, onClose }: ChatInterfacePr
 
   const handleEditMessage = async (messageId: string, newContent: string) => {
     try {
-      const editedMessage = await messageService.editMessage(messageId, newContent)
+      const editedMessage = await messageService.editMessage(
+        messageId,
+        newContent
+      )
       setMessages(prev => prev.map(msg => 
         msg._id === messageId ? editedMessage : msg
       ))

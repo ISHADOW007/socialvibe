@@ -31,6 +31,7 @@ export interface ReadReceipt {
 }
 
 export interface Message {
+  data: never[]
   _id: string
   conversation: string
   sender: {

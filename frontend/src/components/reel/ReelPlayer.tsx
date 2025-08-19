@@ -1,7 +1,6 @@
 import { useRef, useState, useEffect } from 'react'
 import { 
   PlayIcon, 
-  PauseIcon, 
   SpeakerWaveIcon, 
   SpeakerXMarkIcon,
   HeartIcon,
@@ -69,7 +68,7 @@ interface ReelPlayerProps {
   isActive: boolean
   currentUserId?: string
   onLike: (reelId: string) => void
-  onComment: (reelId: string) => void
+  onComment: (reelId: string,text: string) => void
   onShare: (reelId: string) => void
   onSave: (reelId: string) => void
   onUserClick: (username: string) => void
@@ -301,7 +300,7 @@ export default function ReelPlayer({
         {/* Comment */}
         <div className="flex flex-col items-center">
           <button
-            onClick={() => onComment(reel._id)}
+            onClick={() => onComment(reel._id,'hello')}
             className="w-12 h-12 bg-white/20 backdrop-blur-sm rounded-full flex items-center justify-center text-white hover:bg-white/30 transition-all duration-300 transform hover:scale-110"
           >
             <ChatBubbleLeftIcon className="w-7 h-7" />

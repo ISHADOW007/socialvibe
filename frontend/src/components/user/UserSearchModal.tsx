@@ -65,7 +65,7 @@ export default function UserSearchModal({
       setError(null)
       
       const response = await userService.searchUsers(searchQuery.trim(), pageNum, 20)
-      const newUsers = response.data || []
+      const newUsers = response.data?.items || []
 
       if (pageNum === 1) {
         setSearchResults(newUsers)
@@ -73,7 +73,7 @@ export default function UserSearchModal({
         setSearchResults(prev => [...prev, ...newUsers])
       }
 
-      setHasMore(response.pagination?.hasNext || false)
+      setHasMore(response.data?.pagination?.hasNext || false)
       setPage(pageNum)
     } catch (err: any) {
       setError(err.message || 'Failed to search users')
@@ -197,7 +197,7 @@ export default function UserSearchModal({
   const isSearching = searchQuery.trim().length >= 2
 
   return (
-    <Modal onClose={onClose} title={title}>
+    <Modal isOpen={true} onClose={onClose} title={title}>
       <div className="w-full max-w-md">
         {/* Search input */}
         <div className="relative mb-4">

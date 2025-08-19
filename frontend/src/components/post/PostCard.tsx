@@ -335,8 +335,20 @@ export default function PostCard({
         onClose={() => setShowComments(false)}
         contentId={post._id}
         contentType="post"
-        comments={post.comments || []}
-        onAddComment={onComment}
+        comments={(post.comments || []).map(comment => ({
+          ...comment,
+          updatedAt: (comment as any).updatedAt ?? comment.createdAt
+        }))}
+        onAddComment={async (text) => {
+          const result = await onComment(post._id, text)
+          return {
+            ...result,
+            comment: {
+              ...result.comment,
+              updatedAt: (result.comment as any).updatedAt ?? result.comment.createdAt
+            }
+          }
+        }}
       />
     </article>
   )

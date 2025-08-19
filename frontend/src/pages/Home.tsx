@@ -1,7 +1,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { PlusIcon } from '@heroicons/react/24/outline'
 import { useAuthStore } from '@/store/authStore'
-import { postService, type Post } from '@/services/postService'
+import { PostComment, postService, type Post } from '@/services/postService'
 import { storyService } from '@/services/storyService'
 import PostCard from '@/components/post/PostCard'
 import CreatePostModal from '@/components/post/CreatePostModal'
@@ -51,7 +51,7 @@ const Home: React.FC = () => {
       const postsResponse = await postService.getFeedPosts(1, 10)
       
       setPosts(postsResponse.data.items)
-      setHasMore(postsResponse.data.pagination.hasNextPage)
+      setHasMore(postsResponse.data.pagination.hasNext)
       setPage(2)
     } catch (error) {
       console.error('Error loading feed:', error)
@@ -65,7 +65,7 @@ const Home: React.FC = () => {
       setLoadingMore(true)
       const response = await postService.getFeedPosts(page, 10)
       setPosts(prev => [...prev, ...response.data.items])
-      setHasMore(response.data.pagination.hasNextPage)
+      setHasMore(response.data.pagination.hasNext)
       setPage(prev => prev + 1)
     } catch (error) {
       console.error('Error loading more posts:', error)
@@ -113,23 +113,32 @@ const Home: React.FC = () => {
     }
   }
 
-  const handleAddComment = async (postId: string, text: string) => {
-    try {
-      const { comment, commentsCount } = await postService.addComment(postId, text)
-      setPosts(prev => prev.map(post => 
-        post._id === postId 
-          ? { 
-              ...post, 
-              comments: [...post.comments, comment],
-              stats: { ...post.stats, commentsCount }
+  const handleAddComment = async (
+  postId: string,
+  text: string
+): Promise<{ comment: PostComment; commentsCount: number }> => {
+  try {
+    const result = await postService.addComment(postId, text)
+
+    setPosts(prev =>
+      prev.map(post =>
+        post._id === postId
+          ? {
+              ...post,
+              comments: [...post.comments, result.comment],
+              stats: { ...post.stats, commentsCount: result.commentsCount }
             }
           : post
-      ))
-    } catch (error) {
-      console.error('Error adding comment:', error)
-      throw error
-    }
+      )
+    )
+
+    return result // ✅ return the expected type
+  } catch (error) {
+    console.error('Error adding comment:', error)
+    throw error
   }
+}
+
 
 
   if (loading) {

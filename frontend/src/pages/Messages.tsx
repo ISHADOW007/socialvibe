@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react'
-import { useAuthStore } from '@/store/authStore'
+// import { useAuthStore } from '@/store/authStore'
 import socketService from '@/services/socketService'
 import ConversationsList from '@/components/message/ConversationsList'
 import ChatInterface from '@/components/message/ChatInterface'
@@ -61,11 +61,11 @@ export default function Messages() {
         </div>
       )
     }
-
+    //  selectedConversationId={selectedConversation?._id}
     return (
       <div className="h-screen bg-gray-50 dark:bg-gray-900">
         <ConversationsList
-          selectedConversationId={selectedConversation?._id}
+          
           onSelectConversation={handleSelectConversation}
           onNewConversation={handleNewConversation}
         />
