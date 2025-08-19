@@ -1,0 +1,34 @@
+# --------------------
+#  Node (backend + frontend)
+# --------------------
+node_modules
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# --------------------
+#  Environment Files
+# --------------------
+.env
+.env.*      # (ex: .env.local, .env.development)
+
+# --------------------
+#  Build Output
+# --------------------
+/frontend/dist
+/frontend/build
+/backend/dist
+/backend/build
+
+# --------------------
+#  Optional OS
+# --------------------
+.DS_Store
+Thumbs.db
+
+# --------------------
+#  Logs
+# --------------------
+logs
+*.log
