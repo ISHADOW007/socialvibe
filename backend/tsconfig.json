@@ -17,6 +17,7 @@
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true,
     "baseUrl": "./src",
+     "types": ["node"] ,
     "paths": {
       "@/*": ["./*"],
       "@/models/*": ["./models/*"],
