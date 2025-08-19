@@ -1,6 +1,6 @@
 import api, { createFormData } from './api'
 import type { ApiResponse, PaginatedResponse } from '@/types/api'
-import { Message } from './messageService'
+// import { Message } from './messageService'
 
 export interface PostMedia {
   type: 'image' | 'video'
@@ -72,22 +72,19 @@ export const postService = {
     })
     
     // Transform backend response to match frontend expectations
-   const backendData = response.data.data!; // { posts: Post[], pagination: ... }
+  const backendData = response.data.data!;
 
 return {
   status: response.data.status,
-  pagination: backendData.pagination, // <-- add this
+  pagination: backendData.pagination,
   data: {
     items: backendData.posts,
     pagination: backendData.pagination,
-    reverse() {
-      return backendData.posts as unknown as React.SetStateAction<Message[]>;
-    },
-    filter(fn: (m: any) => boolean) {
-      return backendData.posts.filter(fn) as unknown;
-    }
-  }
-};
+    reverse() { return backendData.posts as any; },
+    filter(fn: (m: any) => boolean) { return backendData.posts.filter(fn) as any; }
+  } as any // cast entire data
+} as PaginatedResponse<Post>;
+
 
 
   },
