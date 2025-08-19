@@ -23,27 +23,16 @@ export interface PaginationMeta {
   limit: number
 }
 
-// export interface PaginatedResponse<T = any> {
-//   pagination: any
-//   status: string
-//   data: {
-//     reverse(): import("react").SetStateAction<import("../services/messageService").Message[]>
-//     filter(arg0: (m: any) => boolean): unknown
-//     items: T[]
-//     pagination: PaginationMeta
-//   }
-// }
-
-
 export interface PaginatedResponse<T = any> {
-  status: string;
+  pagination: any
+  status: string
   data: {
-    items: T[];
-    pagination: PaginationMeta;
-  };
+    reverse(): import("react").SetStateAction<import("../services/messageService").Message[]>
+    filter(arg0: (m: any) => boolean): unknown
+    items: T[]
+    pagination: PaginationMeta
+  }
 }
-
-
 
 // API Error types
 export interface ApiError {

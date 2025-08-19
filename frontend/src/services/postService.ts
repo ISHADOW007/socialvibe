@@ -1,5 +1,6 @@
 import api, { createFormData } from './api'
 import type { ApiResponse, PaginatedResponse } from '@/types/api'
+import { Message } from './messageService'
 
 export interface PostMedia {
   type: 'image' | 'video'
@@ -71,17 +72,24 @@ export const postService = {
     })
     
     // Transform backend response to match frontend expectations
-    const backendData = response.data.data!
-    return {
-      status: response.data.status,
-      data: {
-        items: backendData.posts,
-        pagination: {
-          ...backendData.pagination,
-          hasNextPage: backendData.pagination.hasNext // Map hasNext to hasNextPage
-        }
-      }
+   const backendData = response.data.data!; // { posts: Post[], pagination: ... }
+
+return {
+  status: response.data.status,
+  pagination: backendData.pagination, // <-- add this
+  data: {
+    items: backendData.posts,
+    pagination: backendData.pagination,
+    reverse() {
+      return backendData.posts as unknown as React.SetStateAction<Message[]>;
+    },
+    filter(fn: (m: any) => boolean) {
+      return backendData.posts.filter(fn) as unknown;
     }
+  }
+};
+
+
   },
 
   // Get trending posts
